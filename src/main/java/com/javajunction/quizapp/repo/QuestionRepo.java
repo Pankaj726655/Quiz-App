@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface QuestionRepo extends JpaRepository<Question, Integer> {
-    List<Question> findByCategoryContaining(String category);
+    List<Question> findByCategory(String category);
 }

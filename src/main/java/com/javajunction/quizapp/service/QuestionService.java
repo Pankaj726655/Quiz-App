@@ -17,17 +17,21 @@ public class QuestionService {
     public List<Question> getAllQuestions() {
         return repo.findAll();
     }
+    public List<Question> getQuestionsByCategory(String category) {
+        return repo.findByCategory(category);
+    }
 
+    public Question addQuestion(Question question) {
+        return repo.save(question);
+    }
 
+    public void deleteQuestion(int id) {
+        repo.deleteById(id);
+    }
 
-
-
-
-
-
-
-
-
+    public Question updateQuestion(Question question) {
+        return repo.save(question);
+    }
 
     public void load(){
         List<Question> questions = new ArrayList<>();
@@ -52,14 +56,5 @@ public class QuestionService {
         questions.add(new Question(19, "Which sorting algorithm has a time complexity of O(n log n)?", "Merge Sort", "Bubble Sort", "Selection Sort", "Insertion Sort", "Merge Sort", "Hard", "Algorithms"));
         questions.add(new Question(20, "Which of the following is not a pillar of OOP?", "Encapsulation", "Polymorphism", "Abstraction", "Inheritance", "None of the above", "Easy", "OOP Concepts"));
         repo.saveAll(questions);
-    }
-
-
-    public List<Question> getQuestionsByCategory(String category) {
-        return repo.findByCategoryContaining(category);
-    }
-
-    public Question addQuestion(Question question) {
-        return repo.save(question);
     }
 }
