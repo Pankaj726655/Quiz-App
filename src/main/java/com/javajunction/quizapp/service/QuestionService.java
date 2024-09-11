@@ -3,6 +3,8 @@ package com.javajunction.quizapp.service;
 import com.javajunction.quizapp.model.Question;
 import com.javajunction.quizapp.repo.QuestionRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,15 +16,34 @@ public class QuestionService {
     @Autowired
     private QuestionRepo repo;
 
-    public List<Question> getAllQuestions() {
-        return repo.findAll();
-    }
-    public List<Question> getQuestionsByCategory(String category) {
-        return repo.findByCategory(category);
+    public ResponseEntity<List<Question>> getAllQuestions() {
+        try{
+            return new ResponseEntity<>(repo.findAll(), HttpStatus.OK);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
 
-    public Question addQuestion(Question question) {
-        return repo.save(question);
+
+    public ResponseEntity<List<Question>> getQuestionsByCategory(String category) {
+        try{
+            return new ResponseEntity<>(repo.findByCategory(category), HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
+    }
+
+
+    public ResponseEntity<Question> addQuestion(Question question) {
+        try{
+            return new ResponseEntity<>(repo.save(question),HttpStatus.OK);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(repo.save(question),HttpStatus.BAD_REQUEST);
     }
 
     public void deleteQuestion(int id) {
