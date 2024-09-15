@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,8 +49,13 @@ public class QuestionService {
         repo.deleteById(id);
     }
 
-    public Question updateQuestion(Question question) {
-        return repo.save(question);
+    public ResponseEntity<Question> updateQuestion(Question question) {
+        try{
+            return new ResponseEntity<>(repo.save(question),HttpStatus.OK);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(repo.save(question),HttpStatus.BAD_REQUEST);
     }
 
     public void load(){

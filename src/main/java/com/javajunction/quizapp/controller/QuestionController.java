@@ -43,7 +43,7 @@ public class QuestionController {
     }
 
     @PutMapping("updateQuestion")
-    public Question updateQuestion(Question question){
+    public ResponseEntity<Question> updateQuestion(Question question){
         return service.updateQuestion(question);
     }
 }
