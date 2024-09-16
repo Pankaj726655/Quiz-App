@@ -20,11 +20,11 @@ public class QuestionController {
         return service.getAllQuestions();
     }
 
-    @PostMapping("loadAll")
-    public String loadAll(){
-        service.load();
-        return "Load Successfully";
-    }
+//    @PostMapping("loadAll")
+//    public String loadAll(){
+//        service.load();
+//        return "Load Successfully";
+//    }
 
     @GetMapping("category/{category}")
     public ResponseEntity<List<Question>> getQuestionsByCategory(@PathVariable("category") String category){
